@@ -1,0 +1,104 @@
+{
+    "zones": [
+        {
+            "id": "restricted_area_1",
+            "name": "Restricted Zone A",
+            "type": "intrusion",
+            "polygon": [
+                [
+                    100,
+                    200
+                ],
+                [
+                    400,
+                    200
+                ],
+                [
+                    400,
+                    500
+                ],
+                [
+                    100,
+                    500
+                ]
+            ],
+            "enabled": true
+        },
+        {
+            "id": "restricted_area_2",
+            "name": "Server Room Entrance",
+            "type": "intrusion",
+            "polygon": [
+                [
+                    600,
+                    150
+                ],
+                [
+                    800,
+                    150
+                ],
+                [
+                    800,
+                    400
+                ],
+                [
+                    600,
+                    400
+                ]
+            ],
+            "enabled": true
+        },
+        {
+            "id": "loitering_zone_1",
+            "name": "Lobby Area",
+            "type": "loitering",
+            "polygon": [
+                [
+                    200,
+                    300
+                ],
+                [
+                    500,
+                    300
+                ],
+                [
+                    500,
+                    550
+                ],
+                [
+                    200,
+                    550
+                ]
+            ],
+            "loitering_threshold_seconds": 15,
+            "movement_threshold_pixels": 30,
+            "enabled": true
+        },
+        {
+            "id": "loitering_zone_2",
+            "name": "Parking Entrance",
+            "type": "loitering",
+            "polygon": [
+                [
+                    700,
+                    350
+                ],
+                [
+                    950,
+                    350
+                ],
+                [
+                    950,
+                    600
+                ],
+                [
+                    700,
+                    600
+                ]
+            ],
+            "loitering_threshold_seconds": 10,
+            "movement_threshold_pixels": 25,
+            "enabled": true
+        }
+    ]
+}

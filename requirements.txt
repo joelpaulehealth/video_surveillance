@@ -1,0 +1,28 @@
+# Core ML/CV Libraries
+ultralytics>=8.0.0
+opencv-python>=4.8.0
+numpy>=1.24.0
+torch>=2.0.0
+
+# Tracking
+lapx>=0.5.2
+filterpy>=1.4.5
+
+# Geometry & Data Processing
+shapely>=2.0.0
+pandas>=2.0.0
+
+# Configuration & Logging
+pyyaml>=6.0
+loguru>=0.7.0
+
+# CLI
+click>=8.1.0
+tqdm>=4.65.0
+
+# Visualization
+matplotlib>=3.7.0
+
+# Testing
+pytest>=7.4.0
+pytest-cov>=4.1.0

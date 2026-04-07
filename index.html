@@ -1,0 +1,281 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>MOT Challenge - Data</title>
+<meta name="description" content="Multiple Object Tracking: Datasets, Benchmarks, Challenges and more.">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="/css/bmtt.css" />
+<script src="/dbstuff/funcs.js" type="text/javascript"></script>
+
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <style>
+    body {
+        padding-top: 150px;
+        /*padding-bottom: 70px;*/
+        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    }  
+
+
+
+    
+    </style>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn"t work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <a href="https://plus.google.com/105162624056054412979" rel="publisher"></a>
+
+    <!-- header for reCaptcha -->
+ <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-55654658-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+  
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+
+  <div class="container" id="banner">
+      <div class="jumbotron" style="background-image:url(/img/header-bg/mot_bannerthin.png); height:100%;width:100%; background-position: center; background-repeat: no-repeat; text-shadow: 0px 2px 3px #555;">
+      </div>
+      </div>
+
+
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+         
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                  
+ 		<li>
+                        <a href="/"><i class="glyphicon glyphicon-home"></i> home</a>
+						</li>
+
+<li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="glyphicon glyphicon-download"></i> data<span class="caret"></span></a>
+          <ul class="dropdown-menu scrollable-menu" role="menu"><li><a href="/data/MOT15/">MOT15</a></li><li><a href="/data/MOT16/">MOT16</a></li><li><a href="/data/MOT17Det/">MOT17Det</a></li><li><a href="/data/MOT17/">MOT17</a></li><li><a href="/data/MOT20/">MOT20</a></li><li><a href="/data/MOT20Det/">MOT20Det</a></li><li><a href="/data/CVPR_2020_MOTS_Challenge/">CVPR 2020 MOTS Challenge</a></li><li><a href="/data/3D-ZeF20/">3D-ZeF20</a></li><li><a href="/data/MOTS/">MOTS</a></li><li><a href="/data/TAO_Challenge/">TAO Challenge</a></li><li><a href="/data/CTMC-v1/">CTMC-v1</a></li><li><a href="/data/TAO_VOS_Benchmark/">TAO VOS Benchmark</a></li><li><a href="/data/Head_Tracking_21/">Head Tracking 21</a></li><li><a href="/data/STEP-ICCV21/">STEP-ICCV21</a></li><li><a href="/data/MOTSynth-MOT-CVPR22/">MOTSynth-MOT-CVPR22</a></li><li><a href="/data/MOTSynth-MOTS-CVPR22/">MOTSynth-MOTS-CVPR22</a></li><li><a href="/data/OWTB/">OWTB <span class="label label-info">NEW</span></a></li><li><a href="/data/MOTSynth-MOT/">MOTSynth-MOT <span class="label label-info">NEW</span></a></li><li><a href="/data/MOTSynth-MOTS/">MOTSynth-MOTS <span class="label label-info">NEW</span></a></li><li><a href="/data/DAMUNT/">DAMUNT <span class="label label-info">NEW</span></a></li><li><a href="/devkit/">DevKit</a></li>            
+          </ul>
+        </li>
+
+
+
+        <li class="dropdown">
+          <a href="" class="dropdown-toggle" data-toggle="dropdown"> <i class="glyphicon glyphicon-list"></i> results<span class="caret"></span></a>
+          <ul class="dropdown-menu scrollable-menu" role="menu"><li><a href="/results/MOT15/">MOT15</a></li><li><a href="/results/3D_MOT_2015/">3D MOT 2015</a></li><li><a href="/results/MOT16/">MOT16</a></li><li><a href="/results/MOT17Det/">MOT17Det</a></li><li><a href="/results/MOT17/">MOT17</a></li><li><a href="/results/CVPR_2019_Tracking_Challenge/">CVPR 2019 Tracking Challenge</a></li><li><a href="/results/CVPR_2019_Detection_Challenge/">CVPR 2019 Detection Challenge</a></li><li><a href="/results/MOT20/">MOT20</a></li><li><a href="/results/MOT20Det/">MOT20Det</a></li><li><a href="/results/CVPR_2020_MOTS_Challenge/">CVPR 2020 MOTS Challenge</a></li><li><a href="/results/3D-ZeF20/">3D-ZeF20</a></li><li><a href="/results/MOTS/">MOTS</a></li><li><a href="/results/TAO_Challenge/">TAO Challenge</a></li><li><a href="/results/CTMC-v1/">CTMC-v1</a></li><li><a href="/results/Head_Tracking_21/">Head Tracking 21</a></li><li><a href="/results/STEP-ICCV21/">STEP-ICCV21</a></li><li><a href="/results/MOTSynth-MOT-CVPR22/">MOTSynth-MOT-CVPR22</a></li><li><a href="/results/MOTSynth-MOTS-CVPR22/">MOTSynth-MOTS-CVPR22</a></li><li><a href="/results/TAO_Long-Tail/">TAO Long-Tail <span class="label label-info">NEW</span></a></li><li><a href="/results/TAO_Open-World/">TAO Open-World <span class="label label-info">NEW</span></a></li><li><a href="/results/MOTSynth-MOT/">MOTSynth-MOT <span class="label label-info">NEW</span></a></li><li><a href="/results/MOTSynth-MOTS/">MOTSynth-MOTS <span class="label label-info">NEW</span></a></li><li><a href="/results/DAMUNT/">DAMUNT <span class="label label-info">NEW</span></a></li>            
+          </ul>
+        </li>
+
+ 		<li><a href="/vis/"><i class="glyphicon glyphicon-film"></i> vis</a>
+ 		</li>
+ 		<li><a href="/vis-analysis/"><i class="glyphicon glyphicon-star"></i> QVA</a>
+ 		</li>
+
+										
+        <li class="dropdown">
+          <a href="" class="dropdown-toggle" data-toggle="dropdown"> <i class="glyphicon glyphicon-send"></i>  submit <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="/instructions/">Instructions</a></li>
+            <li><a href="/login/">Login to Submit</a></li>
+          </ul>
+        </li>	
+					
+                    <li>
+                       <a href="/faq/"><i class="glyphicon glyphicon-question-sign"></i> FAQ</a>
+                    </li>
+                    <li>
+                        <a href="/people/"><i class="glyphicon glyphicon-user"></i> people</a>
+                    </li>
+
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+		  
+                    <li>
+                        <a href="/login/"><i class="glyphicon glyphicon-log-in"></i> login</a>
+                    </li>
+                    <li>
+                        <a href="/register/"><i class="glyphicon glyphicon-pencil"></i> sign up</a>
+                    </li>
+
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    
+
+    
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-12 text-center">
+            
+
+<h1>MOT17</h2><p>MOT17 Challenge. All MOT16 sequences are used with a new, more accurate ground truth. Each sequences is provided with 3 sets of detections: DPM, Faster-RCNN, and SDP.</p><h2>Training Set</h2><div class="table-responsive"><table class="table table-striped table-hover"><tr class="info"><td nowrap><a href="?chl=10&orderBy=name&orderStyle=DESC">Sample</a></td><td nowrap><a href="?chl=10&orderBy=frame_rate&orderStyle=DESC">
+	<abbr title="Frames per second">Name</abbr></a></td><td nowrap><a href="?chl=10&orderBy=npix&orderStyle=DESC">
+	<abbr title="Frame size (w x h)">FPS</abbr></a></td><td nowrap><a href="?chl=10&orderBy=length&orderStyle=DESC">
+	<abbr title="number of frames (length in mm:ss)">Resolution</abbr></a></td><td nowrap><a href="?chl=10&orderBy=nTr&orderStyle=DESC">
+	<abbr title="Number of annotated trajectories">Length</abbr></a></td><td nowrap><a href="?chl=10&orderBy=nBx&orderStyle=DESC">
+	<abbr title="Total number of annotated pedestrians">Tracks</abbr></a></td><td nowrap><a href="?chl=10&orderBy=density&orderStyle=DESC">
+	<abbr title="Average number of pedestrians per frame">Boxes</abbr></a></td><td>Density</td><td>Description</td><td><abbr title="Please cite in your publication">Source</abbr></td><td>Ref.</td></tr></tr><tr><tr><td><a href='/vis/MOT17-13-SDP'><img src='/img/thumbnails/MOT17-13-SDP.jpg' width='100'></a></td><td>MOT17-13-SDP</td><td>25</td><td>1920x1080</td><td>750 (00:30)</td><td>110</td><td>11642</td><td>15.5</td><td>Filmed from a bus on a busy intersection</td><td><a href='' target='_blank'>link</a></td><td><span class="bibtex-cite"><span class="bibtex-list bibtex-numeric"><span class="bibtex-list-start">[</span><span class="bibtex-ref bibtex-key-MOT16">1</span><span class="bibtex-list-end">]</span></span></span></td></tr>
+<tr><td><a href='/vis/MOT17-11-SDP'><img src='/img/thumbnails/MOT17-11-SDP.jpg' width='100'></a></td><td>MOT17-11-SDP</td><td>30</td><td>1920x1080</td><td>900 (00:30)</td><td>75</td><td>9436</td><td>10.5</td><td>Forward moving camera in a busy shopping mall</td><td><a href='' target='_blank'>link</a></td><td><span class="bibtex-cite"><span class="bibtex-list bibtex-numeric"><span class="bibtex-list-start">[</span><span class="bibtex-ref bibtex-key-MOT16">1</span><span class="bibtex-list-end">]</span></span></span></td></tr>
+<tr><td><a href='/vis/MOT17-10-SDP'><img src='/img/thumbnails/MOT17-10-SDP.jpg' width='100'></a></td><td>MOT17-10-SDP</td><td>30</td><td>1920x1080</td><td>654 (00:22)</td><td>57</td><td>12839</td><td>19.6</td><td>A pedestrian scene filmed at night by a moving camera</td><td><a href='' target='_blank'>link</a></td><td><span class="bibtex-cite"><span class="bibtex-list bibtex-numeric"><span class="bibtex-list-start">[</span><span class="bibtex-ref bibtex-key-MOTChallenge2015">2</span><span class="bibtex-list-end">]</span></span></span></td></tr>
+<tr><td><a href='/vis/MOT17-09-SDP'><img src='/img/thumbnails/MOT17-09-SDP.jpg' width='100'></a></td><td>MOT17-09-SDP</td><td>30</td><td>1920x1080</td><td>525 (00:18)</td><td>26</td><td>5325</td><td>10.1</td><td>A pedestrian street scene filmed from a low angle.</td><td><a href='' target='_blank'>link</a></td><td><span class="bibtex-cite"><span class="bibtex-list bibtex-numeric"><span class="bibtex-list-start">[</span><span class="bibtex-ref bibtex-key-MOTChallenge2015">2</span><span class="bibtex-list-end">]</span></span></span></td></tr>
+<tr><td><a href='/vis/MOT17-05-SDP'><img src='/img/thumbnails/MOT17-05-SDP.jpg' width='100'></a></td><td>MOT17-05-SDP</td><td>14</td><td>640x480</td><td>837 (01:00)</td><td>133</td><td>6917</td><td>8.3</td><td>Street scene from a moving platform</td><td><a href='http://www.vision.ee.ethz.ch/~aess/dataset/' target='_blank'>link</a></td><td><span class="bibtex-cite"><span class="bibtex-list bibtex-numeric"><span class="bibtex-list-start">[</span><span class="bibtex-ref bibtex-key-Ess_2007_ICCV">3</span><span class="bibtex-list-end">]</span></span></span></td></tr>
+<tr><td><a href='/vis/MOT17-04-SDP'><img src='/img/thumbnails/MOT17-04-SDP.jpg' width='100'></a></td><td>MOT17-04-SDP</td><td>30</td><td>1920x1080</td><td>1050 (00:35)</td><td>83</td><td>47557</td><td>45.3</td><td>Pedestrian street at night, elevated viewpoint</td><td><a href='' target='_blank'>link</a></td><td><span class="bibtex-cite"><span class="bibtex-list bibtex-numeric"><span class="bibtex-list-start">[</span><span class="bibtex-ref bibtex-key-MOT16">1</span><span class="bibtex-list-end">]</span></span></span></td></tr>
+<tr><td><a href='/vis/MOT17-02-SDP'><img src='/img/thumbnails/MOT17-02-SDP.jpg' width='100'></a></td><td>MOT17-02-SDP</td><td>30</td><td>1920x1080</td><td>600 (00:20)</td><td>62</td><td>18581</td><td>31.0</td><td>People walking around a large square.</td><td><a href='http://vimeo.com/60139361' target='_blank'>link</a></td><td><span class="bibtex-cite"><span class="bibtex-list bibtex-numeric"><span class="bibtex-list-start">[</span><span class="bibtex-ref bibtex-key-MOTChallenge2015">2</span><span class="bibtex-list-end">]</span></span></span></td></tr>
+<tr><td><a href='/vis/MOT17-13-FRCNN'><img src='/img/thumbnails/MOT17-13-FRCNN.jpg' width='100'></a></td><td>MOT17-13-FRCNN</td><td>25</td><td>1920x1080</td><td>750 (00:30)</td><td>110</td><td>11642</td><td>15.5</td><td>Filmed from a bus on a busy intersection</td><td><a href='' target='_blank'>link</a></td><td><span class="bibtex-cite"><span class="bibtex-list bibtex-numeric"><span class="bibtex-list-start">[</span><span class="bibtex-ref bibtex-key-MOT16">1</span><span class="bibtex-list-end">]</span></span></span></td></tr>
+<tr><td><a href='/vis/MOT17-11-FRCNN'><img src='/img/thumbnails/MOT17-11-FRCNN.jpg' width='100'></a></td><td>MOT17-11-FRCNN</td><td>30</td><td>1920x1080</td><td>900 (00:30)</td><td>75</td><td>9436</td><td>10.5</td><td>Forward moving camera in a busy shopping mall</td><td><a href='' target='_blank'>link</a></td><td><span class="bibtex-cite"><span class="bibtex-list bibtex-numeric"><span class="bibtex-list-start">[</span><span class="bibtex-ref bibtex-key-MOT16">1</span><span class="bibtex-list-end">]</span></span></span></td></tr>
+<tr><td><a href='/vis/MOT17-10-FRCNN'><img src='/img/thumbnails/MOT17-10-FRCNN.jpg' width='100'></a></td><td>MOT17-10-FRCNN</td><td>30</td><td>1920x1080</td><td>654 (00:22)</td><td>57</td><td>12839</td><td>19.6</td><td>A pedestrian scene filmed at night by a moving camera</td><td><a href='' target='_blank'>link</a></td><td><span class="bibtex-cite"><span class="bibtex-list bibtex-numeric"><span class="bibtex-list-start">[</span><span class="bibtex-ref bibtex-key-MOTChallenge2015">2</span><span class="bibtex-list-end">]</span></span></span></td></tr>
+<tr><td><a href='/vis/MOT17-09-FRCNN'><img src='/img/thumbnails/MOT17-09-FRCNN.jpg' width='100'></a></td><td>MOT17-09-FRCNN</td><td>30</td><td>1920x1080</td><td>525 (00:18)</td><td>26</td><td>5325</td><td>10.1</td><td>A pedestrian street scene filmed from a low angle.</td><td><a href='' target='_blank'>link</a></td><td><span class="bibtex-cite"><span class="bibtex-list bibtex-numeric"><span class="bibtex-list-start">[</span><span class="bibtex-ref bibtex-key-MOTChallenge2015">2</span><span class="bibtex-list-end">]</span></span></span></td></tr>
+<tr><td><a href='/vis/MOT17-05-FRCNN'><img src='/img/thumbnails/MOT17-05-FRCNN.jpg' width='100'></a></td><td>MOT17-05-FRCNN</td><td>14</td><td>640x480</td><td>837 (01:00)</td><td>133</td><td>6917</td><td>8.3</td><td>Street scene from a moving platform</td><td><a href='http://www.vision.ee.ethz.ch/~aess/dataset/' target='_blank'>link</a></td><td><span class="bibtex-cite"><span class="bibtex-list bibtex-numeric"><span class="bibtex-list-start">[</span><span class="bibtex-ref bibtex-key-Ess_2007_ICCV">3</span><span class="bibtex-list-end">]</span></span></span></td></tr>
+<tr><td><a href='/vis/MOT17-04-FRCNN'><img src='/img/thumbnails/MOT17-04-FRCNN.jpg' width='100'></a></td><td>MOT17-04-FRCNN</td><td>30</td><td>1920x1080</td><td>1050 (00:35)</td><td>83</td><td>47557</td><td>45.3</td><td>Pedestrian street at night, elevated viewpoint</td><td><a href='' target='_blank'>link</a></td><td><span class="bibtex-cite"><span class="bibtex-list bibtex-numeric"><span class="bibtex-list-start">[</span><span class="bibtex-ref bibtex-key-MOT16">1</span><span class="bibtex-list-end">]</span></span></span></td></tr>
+<tr><td><a href='/vis/MOT17-02-FRCNN'><img src='/img/thumbnails/MOT17-02-FRCNN.jpg' width='100'></a></td><td>MOT17-02-FRCNN</td><td>30</td><td>1920x1080</td><td>600 (00:20)</td><td>62</td><td>18581</td><td>31.0</td><td>People walking around a large square.</td><td><a href='http://vimeo.com/60139361' target='_blank'>link</a></td><td><span class="bibtex-cite"><span class="bibtex-list bibtex-numeric"><span class="bibtex-list-start">[</span><span class="bibtex-ref bibtex-key-MOTChallenge2015">2</span><span class="bibtex-list-end">]</span></span></span></td></tr>
+<tr><td><a href='/vis/MOT17-13-DPM'><img src='/img/thumbnails/MOT17-13-DPM.jpg' width='100'></a></td><td>MOT17-13-DPM</td><td>25</td><td>1920x1080</td><td>750 (00:30)</td><td>110</td><td>11642</td><td>15.5</td><td>Filmed from a bus on a busy intersection</td><td><a href='' target='_blank'>link</a></td><td><span class="bibtex-cite"><span class="bibtex-list bibtex-numeric"><span class="bibtex-list-start">[</span><span class="bibtex-ref bibtex-key-MOT16">1</span><span class="bibtex-list-end">]</span></span></span></td></tr>
+<tr><td><a href='/vis/MOT17-11-DPM'><img src='/img/thumbnails/MOT17-11-DPM.jpg' width='100'></a></td><td>MOT17-11-DPM</td><td>30</td><td>1920x1080</td><td>900 (00:30)</td><td>75</td><td>9436</td><td>10.5</td><td>Forward moving camera in a busy shopping mall</td><td><a href='' target='_blank'>link</a></td><td><span class="bibtex-cite"><span class="bibtex-list bibtex-numeric"><span class="bibtex-list-start">[</span><span class="bibtex-ref bibtex-key-MOT16">1</span><span class="bibtex-list-end">]</span></span></span></td></tr>
+<tr><td><a href='/vis/MOT17-10-DPM'><img src='/img/thumbnails/MOT17-10-DPM.jpg' width='100'></a></td><td>MOT17-10-DPM</td><td>30</td><td>1920x1080</td><td>654 (00:22)</td><td>57</td><td>12839</td><td>19.6</td><td>A pedestrian scene filmed at night by a moving camera</td><td><a href='' target='_blank'>link</a></td><td><span class="bibtex-cite"><span class="bibtex-list bibtex-numeric"><span class="bibtex-list-start">[</span><span class="bibtex-ref bibtex-key-MOTChallenge2015">2</span><span class="bibtex-list-end">]</span></span></span></td></tr>
+<tr><td><a href='/vis/MOT17-09-DPM'><img src='/img/thumbnails/MOT17-09-DPM.jpg' width='100'></a></td><td>MOT17-09-DPM</td><td>30</td><td>1920x1080</td><td>525 (00:18)</td><td>26</td><td>5325</td><td>10.1</td><td>A pedestrian street scene filmed from a low angle.</td><td><a href='' target='_blank'>link</a></td><td><span class="bibtex-cite"><span class="bibtex-list bibtex-numeric"><span class="bibtex-list-start">[</span><span class="bibtex-ref bibtex-key-MOTChallenge2015">2</span><span class="bibtex-list-end">]</span></span></span></td></tr>
+<tr><td><a href='/vis/MOT17-05-DPM'><img src='/img/thumbnails/MOT17-05-DPM.jpg' width='100'></a></td><td>MOT17-05-DPM</td><td>14</td><td>640x480</td><td>837 (01:00)</td><td>133</td><td>6917</td><td>8.3</td><td>Street scene from a moving platform</td><td><a href='http://www.vision.ee.ethz.ch/~aess/dataset/' target='_blank'>link</a></td><td><span class="bibtex-cite"><span class="bibtex-list bibtex-numeric"><span class="bibtex-list-start">[</span><span class="bibtex-ref bibtex-key-Ess_2007_ICCV">3</span><span class="bibtex-list-end">]</span></span></span></td></tr>
+<tr><td><a href='/vis/MOT17-04-DPM'><img src='/img/thumbnails/MOT17-04-DPM.jpg' width='100'></a></td><td>MOT17-04-DPM</td><td>30</td><td>1920x1080</td><td>1050 (00:35)</td><td>83</td><td>47557</td><td>45.3</td><td>Pedestrian street at night, elevated viewpoint</td><td><a href='' target='_blank'>link</a></td><td><span class="bibtex-cite"><span class="bibtex-list bibtex-numeric"><span class="bibtex-list-start">[</span><span class="bibtex-ref bibtex-key-MOT16">1</span><span class="bibtex-list-end">]</span></span></span></td></tr>
+<tr><td><a href='/vis/MOT17-02-DPM'><img src='/img/thumbnails/MOT17-02-DPM.jpg' width='100'></a></td><td>MOT17-02-DPM</td><td>30</td><td>1920x1080</td><td>600 (00:20)</td><td>62</td><td>18581</td><td>31.0</td><td>People walking around a large square.</td><td><a href='http://vimeo.com/60139361' target='_blank'>link</a></td><td><span class="bibtex-cite"><span class="bibtex-list bibtex-numeric"><span class="bibtex-list-start">[</span><span class="bibtex-ref bibtex-key-MOTChallenge2015">2</span><span class="bibtex-list-end">]</span></span></span></td></tr>
+<tr>
+</tr><tr>
+<td></td> 
+<td>Total </td>
+<td></td> 
+<td></td>
+
+<td>15948 frm. <br>(645 s.)</td><td>1638 </td><td>336891 </td><td>21.1</td><td></td>
+<td></td>
+<td></td></tr></table></div><hr><h2>Test Set</h2><div class="table-responsive"><table class="table table-striped  table-hover"><tr class="info"><td nowrap><a href="?chl=10&orderBy=name&orderStyle=DESC">Sample</a></td><td nowrap><a href="?chl=10&orderBy=frame_rate&orderStyle=DESC">
+	<abbr title="Frames per second">Name</abbr></a></td><td nowrap><a href="?chl=10&orderBy=npix&orderStyle=DESC">
+	<abbr title="Frame size (w x h)">FPS</abbr></a></td><td nowrap><a href="?chl=10&orderBy=length&orderStyle=DESC">
+	<abbr title="number of frames (length in mm:ss)">Resolution</abbr></a></td><td nowrap><a href="?chl=10&orderBy=nTr&orderStyle=DESC">
+	<abbr title="Number of annotated trajectories">Length</abbr></a></td><td nowrap><a href="?chl=10&orderBy=nBx&orderStyle=DESC">
+	<abbr title="Total number of annotated pedestrians">Tracks</abbr></a></td><td nowrap><a href="?chl=10&orderBy=density&orderStyle=DESC">
+	<abbr title="Average number of pedestrians per frame">Boxes</abbr></a></td><td>Density</td><td>Description</td><td><abbr title="Please cite in your publication">Source</abbr></td><td>Ref.</td></tr></tr><tr><tr><td><a href='/vis/MOT17-14-SDP'><img src='/img/thumbnails/MOT17-14-SDP.jpg' width='100'></a></td><td>MOT17-14-SDP</td><td>25</td><td>1920x1080</td><td>750 (00:30)</td><td>164</td><td>18483</td><td>24.6</td><td>Filmed from a bus on a busy intersection</td><td><a href='' target='_blank'>link</a></td><td><span class="bibtex-cite"><span class="bibtex-list bibtex-numeric"><span class="bibtex-list-start">[</span><span class="bibtex-ref bibtex-key-MOT16">1</span><span class="bibtex-list-end">]</span></span></span></td></tr><tr><td><a href='/vis/MOT17-12-SDP'><img src='/img/thumbnails/MOT17-12-SDP.jpg' width='100'></a></td><td>MOT17-12-SDP</td><td>30</td><td>1920x1080</td><td>900 (00:30)</td><td>91</td><td>8667</td><td>9.6</td><td>Forward moving camera in a busy shopping mall</td><td><a href='' target='_blank'>link</a></td><td><span class="bibtex-cite"><span class="bibtex-list bibtex-numeric"><span class="bibtex-list-start">[</span><span class="bibtex-ref bibtex-key-MOT16">1</span><span class="bibtex-list-end">]</span></span></span></td></tr><tr><td><a href='/vis/MOT17-08-SDP'><img src='/img/thumbnails/MOT17-08-SDP.jpg' width='100'></a></td><td>MOT17-08-SDP</td><td>30</td><td>1920x1080</td><td>625 (00:21)</td><td>76</td><td>21124</td><td>33.8</td><td>A crowded pedestrian street, stationary camera</td><td><a href='' target='_blank'>link</a></td><td><span class="bibtex-cite"><span class="bibtex-list bibtex-numeric"><span class="bibtex-list-start">[</span><span class="bibtex-ref bibtex-key-MOTChallenge2015">2</span><span class="bibtex-list-end">]</span></span></span></td></tr><tr><td><a href='/vis/MOT17-07-SDP'><img src='/img/thumbnails/MOT17-07-SDP.jpg' width='100'></a></td><td>MOT17-07-SDP</td><td>30</td><td>1920x1080</td><td>500 (00:17)</td><td>60</td><td>16893</td><td>33.8</td><td>A busy pedestrian street filmed at eye level by a moving camera</td><td><a href='' target='_blank'>link</a></td><td><span class="bibtex-cite"><span class="bibtex-list bibtex-numeric"><span class="bibtex-list-start">[</span><span class="bibtex-ref bibtex-key-MOTChallenge2015">2</span><span class="bibtex-list-end">]</span></span></span></td></tr><tr><td><a href='/vis/MOT17-06-SDP'><img src='/img/thumbnails/MOT17-06-SDP.jpg' width='100'></a></td><td>MOT17-06-SDP</td><td>14</td><td>640x480</td><td>1194 (01:25)</td><td>222</td><td>11784</td><td>9.9</td><td>Street scene from a moving platform</td><td><a href='http://www.vision.ee.ethz.ch/~aess/dataset/' target='_blank'>link</a></td><td><span class="bibtex-cite"><span class="bibtex-list bibtex-numeric"><span class="bibtex-list-start">[</span><span class="bibtex-ref bibtex-key-Ess_2007_ICCV">3</span><span class="bibtex-list-end">]</span></span></span></td></tr><tr><td><a href='/vis/MOT17-03-SDP'><img src='/img/thumbnails/MOT17-03-SDP.jpg' width='100'></a></td><td>MOT17-03-SDP</td><td>30</td><td>1920x1080</td><td>1500 (00:50)</td><td>148</td><td>104675</td><td>69.8</td><td>Pedestrian street at night, elevated viewpoint</td><td><a href='' target='_blank'>link</a></td><td><span class="bibtex-cite"><span class="bibtex-list bibtex-numeric"><span class="bibtex-list-start">[</span><span class="bibtex-ref bibtex-key-MOT16">1</span><span class="bibtex-list-end">]</span></span></span></td></tr><tr><td><a href='/vis/MOT17-01-SDP'><img src='/img/thumbnails/MOT17-01-SDP.jpg' width='100'></a></td><td>MOT17-01-SDP</td><td>30</td><td>1920x1080</td><td>450 (00:15)</td><td>24</td><td>6450</td><td>14.3</td><td>People walking around a large square.</td><td><a href='http://vimeo.com/60139361' target='_blank'>link</a></td><td><span class="bibtex-cite"><span class="bibtex-list bibtex-numeric"><span class="bibtex-list-start">[</span><span class="bibtex-ref bibtex-key-MOTChallenge2015">2</span><span class="bibtex-list-end">]</span></span></span></td></tr><tr><td><a href='/vis/MOT17-14-FRCNN'><img src='/img/thumbnails/MOT17-14-FRCNN.jpg' width='100'></a></td><td>MOT17-14-FRCNN</td><td>25</td><td>1920x1080</td><td>750 (00:30)</td><td>164</td><td>18483</td><td>24.6</td><td>Filmed from a bus on a busy intersection</td><td><a href='' target='_blank'>link</a></td><td><span class="bibtex-cite"><span class="bibtex-list bibtex-numeric"><span class="bibtex-list-start">[</span><span class="bibtex-ref bibtex-key-MOT16">1</span><span class="bibtex-list-end">]</span></span></span></td></tr><tr><td><a href='/vis/MOT17-12-FRCNN'><img src='/img/thumbnails/MOT17-12-FRCNN.jpg' width='100'></a></td><td>MOT17-12-FRCNN</td><td>30</td><td>1920x1080</td><td>900 (00:30)</td><td>91</td><td>8667</td><td>9.6</td><td>Forward moving camera in a busy shopping mall</td><td><a href='' target='_blank'>link</a></td><td><span class="bibtex-cite"><span class="bibtex-list bibtex-numeric"><span class="bibtex-list-start">[</span><span class="bibtex-ref bibtex-key-MOT16">1</span><span class="bibtex-list-end">]</span></span></span></td></tr><tr><td><a href='/vis/MOT17-08-FRCNN'><img src='/img/thumbnails/MOT17-08-FRCNN.jpg' width='100'></a></td><td>MOT17-08-FRCNN</td><td>30</td><td>1920x1080</td><td>625 (00:21)</td><td>76</td><td>21124</td><td>33.8</td><td>A crowded pedestrian street, stationary camera</td><td><a href='' target='_blank'>link</a></td><td><span class="bibtex-cite"><span class="bibtex-list bibtex-numeric"><span class="bibtex-list-start">[</span><span class="bibtex-ref bibtex-key-MOTChallenge2015">2</span><span class="bibtex-list-end">]</span></span></span></td></tr><tr><td><a href='/vis/MOT17-07-FRCNN'><img src='/img/thumbnails/MOT17-07-FRCNN.jpg' width='100'></a></td><td>MOT17-07-FRCNN</td><td>30</td><td>1920x1080</td><td>500 (00:17)</td><td>60</td><td>16893</td><td>33.8</td><td>A busy pedestrian street filmed at eye level by a moving camera</td><td><a href='' target='_blank'>link</a></td><td><span class="bibtex-cite"><span class="bibtex-list bibtex-numeric"><span class="bibtex-list-start">[</span><span class="bibtex-ref bibtex-key-MOTChallenge2015">2</span><span class="bibtex-list-end">]</span></span></span></td></tr><tr><td><a href='/vis/MOT17-06-FRCNN'><img src='/img/thumbnails/MOT17-06-FRCNN.jpg' width='100'></a></td><td>MOT17-06-FRCNN</td><td>14</td><td>640x480</td><td>1194 (01:25)</td><td>222</td><td>11784</td><td>9.9</td><td>Street scene from a moving platform</td><td><a href='http://www.vision.ee.ethz.ch/~aess/dataset/' target='_blank'>link</a></td><td><span class="bibtex-cite"><span class="bibtex-list bibtex-numeric"><span class="bibtex-list-start">[</span><span class="bibtex-ref bibtex-key-Ess_2007_ICCV">3</span><span class="bibtex-list-end">]</span></span></span></td></tr><tr><td><a href='/vis/MOT17-03-FRCNN'><img src='/img/thumbnails/MOT17-03-FRCNN.jpg' width='100'></a></td><td>MOT17-03-FRCNN</td><td>30</td><td>1920x1080</td><td>1500 (00:50)</td><td>148</td><td>104675</td><td>69.8</td><td>Pedestrian street at night, elevated viewpoint</td><td><a href='' target='_blank'>link</a></td><td><span class="bibtex-cite"><span class="bibtex-list bibtex-numeric"><span class="bibtex-list-start">[</span><span class="bibtex-ref bibtex-key-MOT16">1</span><span class="bibtex-list-end">]</span></span></span></td></tr><tr><td><a href='/vis/MOT17-01-FRCNN'><img src='/img/thumbnails/MOT17-01-FRCNN.jpg' width='100'></a></td><td>MOT17-01-FRCNN</td><td>30</td><td>1920x1080</td><td>450 (00:15)</td><td>24</td><td>6450</td><td>14.3</td><td>People walking around a large square.</td><td><a href='http://vimeo.com/60139361' target='_blank'>link</a></td><td><span class="bibtex-cite"><span class="bibtex-list bibtex-numeric"><span class="bibtex-list-start">[</span><span class="bibtex-ref bibtex-key-MOTChallenge2015">2</span><span class="bibtex-list-end">]</span></span></span></td></tr><tr><td><a href='/vis/MOT17-14-DPM'><img src='/img/thumbnails/MOT17-14-DPM.jpg' width='100'></a></td><td>MOT17-14-DPM</td><td>25</td><td>1920x1080</td><td>750 (00:30)</td><td>164</td><td>18483</td><td>24.6</td><td>Filmed from a bus on a busy intersection</td><td><a href='' target='_blank'>link</a></td><td><span class="bibtex-cite"><span class="bibtex-list bibtex-numeric"><span class="bibtex-list-start">[</span><span class="bibtex-ref bibtex-key-MOT16">1</span><span class="bibtex-list-end">]</span></span></span></td></tr><tr><td><a href='/vis/MOT17-12-DPM'><img src='/img/thumbnails/MOT17-12-DPM.jpg' width='100'></a></td><td>MOT17-12-DPM</td><td>30</td><td>1920x1080</td><td>900 (00:30)</td><td>91</td><td>8667</td><td>9.6</td><td>Forward moving camera in a busy shopping mall</td><td><a href='' target='_blank'>link</a></td><td><span class="bibtex-cite"><span class="bibtex-list bibtex-numeric"><span class="bibtex-list-start">[</span><span class="bibtex-ref bibtex-key-MOT16">1</span><span class="bibtex-list-end">]</span></span></span></td></tr><tr><td><a href='/vis/MOT17-08-DPM'><img src='/img/thumbnails/MOT17-08-DPM.jpg' width='100'></a></td><td>MOT17-08-DPM</td><td>30</td><td>1920x1080</td><td>625 (00:21)</td><td>76</td><td>21124</td><td>33.8</td><td>A crowded pedestrian street, stationary camera</td><td><a href='' target='_blank'>link</a></td><td><span class="bibtex-cite"><span class="bibtex-list bibtex-numeric"><span class="bibtex-list-start">[</span><span class="bibtex-ref bibtex-key-MOTChallenge2015">2</span><span class="bibtex-list-end">]</span></span></span></td></tr><tr><td><a href='/vis/MOT17-07-DPM'><img src='/img/thumbnails/MOT17-07-DPM.jpg' width='100'></a></td><td>MOT17-07-DPM</td><td>30</td><td>1920x1080</td><td>500 (00:17)</td><td>60</td><td>16893</td><td>33.8</td><td>A busy pedestrian street filmed at eye level by a moving camera</td><td><a href='' target='_blank'>link</a></td><td><span class="bibtex-cite"><span class="bibtex-list bibtex-numeric"><span class="bibtex-list-start">[</span><span class="bibtex-ref bibtex-key-MOTChallenge2015">2</span><span class="bibtex-list-end">]</span></span></span></td></tr><tr><td><a href='/vis/MOT17-06-DPM'><img src='/img/thumbnails/MOT17-06-DPM.jpg' width='100'></a></td><td>MOT17-06-DPM</td><td>14</td><td>640x480</td><td>1194 (01:25)</td><td>222</td><td>11784</td><td>9.9</td><td>Street scene from a moving platform</td><td><a href='http://www.vision.ee.ethz.ch/~aess/dataset/' target='_blank'>link</a></td><td><span class="bibtex-cite"><span class="bibtex-list bibtex-numeric"><span class="bibtex-list-start">[</span><span class="bibtex-ref bibtex-key-Ess_2007_ICCV">3</span><span class="bibtex-list-end">]</span></span></span></td></tr><tr><td><a href='/vis/MOT17-03-DPM'><img src='/img/thumbnails/MOT17-03-DPM.jpg' width='100'></a></td><td>MOT17-03-DPM</td><td>30</td><td>1920x1080</td><td>1500 (00:50)</td><td>148</td><td>104675</td><td>69.8</td><td>Pedestrian street at night, elevated viewpoint</td><td><a href='' target='_blank'>link</a></td><td><span class="bibtex-cite"><span class="bibtex-list bibtex-numeric"><span class="bibtex-list-start">[</span><span class="bibtex-ref bibtex-key-MOT16">1</span><span class="bibtex-list-end">]</span></span></span></td></tr><tr><td><a href='/vis/MOT17-01-DPM'><img src='/img/thumbnails/MOT17-01-DPM.jpg' width='100'></a></td><td>MOT17-01-DPM</td><td>30</td><td>1920x1080</td><td>450 (00:15)</td><td>24</td><td>6450</td><td>14.3</td><td>People walking around a large square.</td><td><a href='http://vimeo.com/60139361' target='_blank'>link</a></td><td><span class="bibtex-cite"><span class="bibtex-list bibtex-numeric"><span class="bibtex-list-start">[</span><span class="bibtex-ref bibtex-key-MOTChallenge2015">2</span><span class="bibtex-list-end">]</span></span></span></td></tr><tr>
+</tr><tr>
+<td></td> 
+<td>Total </td>
+<td></td> 
+<td></td>
+<td>17757 frm. <br>(744 s.)</td><td>2355 </td><td>564228 </td><td>31.8</td><td></td>
+<td></td>
+<td></td></tr></table></div><br><br>
+	<a id='download'></a><h1>Download</h1>
+	<i class='glyphicon glyphicon-download'></i><a href='/data/MOT17.zip'>Get all data</a> (5.5 GB)<br>
+	<i class='glyphicon glyphicon-download'></i><a href='/data/MOT17Labels.zip'>Get files (no img) only</a> (9.7 MB)<br><i class='glyphicon glyphicon-download'></i>
+	<a href='https://github.com/dendorferpatrick/MOTChallengeEvalKit'>Development Kit</a>
+	
+<p>
+Note that the data contains the same set of sequences (frames) as MOT16 three times. For convenience you may download the entire data which will extract in correct folder structure. Alternatively, you may re-use the MOT16 sequences (frames) locally. <strong>Important:</strong> Both the ground truth and the detection set is new for MOT17!
+</p>
+
+            </div>
+        </div>
+        <!-- /.row -->
+
+	        <div class="row">
+            <div class="col-lg-12 text-left">
+	      		  
+	      <h2 id="references">
+	      References:
+	      </h2>
+	      <br>
+<table class="bibtex-biblio">
+	<tr id="MOT16" class="bibtex-entry bibtex-numeric">
+		<td class="bibtex-reference bibtex-numeric"><span class="bibtex-list bibtex-numeric"><span class="bibtex-list-start">[</span><span class="bibtex-ref bibtex-key-MOT16">1</span><span class="bibtex-list-end">]</span></span></td>
+		<td class="bibtex-citation"><span class="bibtex-article"><span class="bibtex-author">Milan, A., Leal-Taix&eacute;, L., Reid, I., Roth, S. &amp; Schindler, K.</span> <span class="bibtex-title"><a href="http://arxiv.org/abs/1603.00831">MOT16: A Benchmark for Multi-Object Tracking</a></span>.  <span class="bibtex-jname">arXiv:1603.00831 [cs]</span>, <span class="bibtex-year">2016</span>., <span class="bibtex-note">(arXiv: 1603.00831)</span>.</span></td>
+	</tr>
+	<tr id="MOTChallenge2015" class="bibtex-entry bibtex-numeric">
+		<td class="bibtex-reference bibtex-numeric"><span class="bibtex-list bibtex-numeric"><span class="bibtex-list-start">[</span><span class="bibtex-ref bibtex-key-MOTChallenge2015">2</span><span class="bibtex-list-end">]</span></span></td>
+		<td class="bibtex-citation"><span class="bibtex-article"><span class="bibtex-author">Leal-Taix&eacute;, L., Milan, A., Reid, I., Roth, S. &amp; Schindler, K.</span> <span class="bibtex-title"><a href="http://arxiv.org/abs/1504.01942">MOTChallenge 2015: Towards a Benchmark for Multi-Target Tracking</a></span>.  <span class="bibtex-jname">arXiv:1504.01942 [cs]</span>, <span class="bibtex-year">2015</span>., <span class="bibtex-note">(arXiv: 1504.01942)</span>.</span></td>
+	</tr>
+	<tr id="Ess_2007_ICCV" class="bibtex-entry bibtex-numeric">
+		<td class="bibtex-reference bibtex-numeric"><span class="bibtex-list bibtex-numeric"><span class="bibtex-list-start">[</span><span class="bibtex-ref bibtex-key-Ess_2007_ICCV">3</span><span class="bibtex-list-end">]</span></span></td>
+		<td class="bibtex-citation"><span class="bibtex-inproceedings"><span class="bibtex-author">Ess, A., Leibe, B. &amp; Gool, L.V.</span> <span class="bibtex-title"><a href="http://www.google.com/search?q=Depth and Appearance for Mobile Scene Analysis">Depth and Appearance for Mobile Scene Analysis</a></span>. In <span class="bibtex-booktitle">Proceedings of the Eleventh IEEE International Conference on Computer Vision</span>, <span class="bibtex-year">2007</span>.</span></td>
+	</tr>
+</table>
+            
+		  
+            </div>
+        </div>
+        <!-- /.row -->            
+
+      
+    </div>
+    <!-- /.container -->
+    
+    
+
+
+<br><br><br>
+        <div class="container" style="position:relative; bottom:5px;">
+        <a class="navbar-brand" href="https://dvl.in.tum.de/"><img src="/img/tum_logo.gif" height="35"></a>   
+		<a class="navbar-brand" href="http://videonet.team"><img src="/img/videonet_title.png" height="40"></a>
+	    <a class="navbar-brand" href="http://www.prs.igp.ethz.ch/"><img src="/img/ETH_logo.png" height="30"></a>
+	    <a class="navbar-brand" href="http://blogs.adelaide.edu.au/acvt/"><img src="/img/UOA_logo.png" height="35"></a>                
+	    <a class="navbar-brand" href="http://www.gris.tu-darmstadt.de/research/visinf/index.en.htm"><img src="/img/TUD_logo.png" height="35"></a>                
+	    
+            
+<p class="navbar-text"> <a href = "mailto:infoATmotchallengeDOTnet" 
+		  onclick = "this.href=this.href.replace(/AT/,'&#64;').replace(/DOT/,'&#46;')"><i class="glyphicon glyphicon-envelope"></i> Contact</a>
+        
+<p class="navbar-text pull-right">
+	    <a href="https://www.twitter.com/MOTChallenge" target="_blank"><img src="/img/svg/43-twitter.svg" height="36"></a>     
+	    <a href="https://www.facebook.com/MOTChallenge" target="_blank"><img src="/img/svg/46-facebook.svg" height="36"></a>     
+	    <a href="https://google.com/+MotchallengeNet" target="_blank"><img src="/img/svg/80-google-plus.svg" height="36"></a>                             
+            </p>           
+            <p class="navbar-text pull-right">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank"><img src="/img/cc_by-nc-sa-small.png"></a>
+</p>
+
+		</div>
+
+		 
+        <!-- /.container -->
+    
+
+    
+
+
+
+<!-- jQuery Version 1.11.0 -->
+<script src='/js/jquery-1.11.0.js'></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src='/js/bootstrap.min.js'></script>    
+    
+</body>
+</html>
+

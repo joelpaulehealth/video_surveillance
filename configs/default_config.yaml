@@ -1,0 +1,41 @@
+# Default configuration for Video Surveillance System
+
+video:
+  output_path: "output/videos/annotated.mp4"
+  frame_skip: 1  # Process every Nth frame (1 = all frames)
+  resize_width: null  # null = original size, or set to e.g., 1280
+
+detection:
+  model: "yolov8n.pt"  # Options: yolov8n.pt, yolov8s.pt, yolov8m.pt, yolov8l.pt, yolov8x.pt
+  confidence_threshold: 0.5
+  iou_threshold: 0.45
+  device: "cuda"  # "cuda" or "cpu"
+  classes: [0]  # 0 = person in COCO
+  max_detections: 100
+
+tracking:
+  tracker: "bytetrack"
+  max_age: 30  # Frames to keep lost tracks
+  min_hits: 3  # Minimum detections before confirmed track
+  iou_threshold: 0.3
+
+events:
+  zones_config: "configs/zones_example.json"
+  event_log_path: "output/events/events.json"
+  deduplicate_window_seconds: 2.0
+  default_loitering_threshold: 10.0  # Seconds
+  default_movement_threshold: 25.0  # Pixels
+
+visualization:
+  draw_boxes: true
+  draw_tracks: true
+  draw_zones: true
+  draw_events: true
+  draw_fps: true
+  font_scale: 0.6
+  box_thickness: 2
+  track_history_length: 30
+
+logging:
+  level: "INFO"
+  log_file: "output/surveillance.log"
