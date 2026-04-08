@@ -1,0 +1,39 @@
+2026-04-07 20:10:22 | INFO     | src.utils.logger:setup_logger:59 | Logger initialized with level: INFO
+2026-04-07 20:10:22 | INFO     | src.pipeline.video_processor:__init__:71 | VideoProcessor initialized
+2026-04-07 20:10:22 | INFO     | src.pipeline.video_processor:process_video:120 | Processing video: /content/data/videos/MOT17-02-DPM.mp4
+2026-04-07 20:10:22 | INFO     | src.pipeline.video_processor:process_video:133 | Video info: 1920x1080, 30.00 FPS, 600 frames
+2026-04-07 20:10:22 | INFO     | src.detection.yolo_detector:__init__:73 | Loading YOLO model: yolov8n.pt on cuda
+2026-04-07 20:11:51 | INFO     | src.utils.logger:setup_logger:59 | Logger initialized with level: INFO
+2026-04-07 20:11:51 | INFO     | src.pipeline.video_processor:__init__:71 | VideoProcessor initialized
+2026-04-07 20:11:51 | INFO     | src.pipeline.video_processor:process_video:120 | Processing video: /content/data/videos/MOT17-02-DPM.mp4
+2026-04-07 20:11:51 | INFO     | src.pipeline.video_processor:process_video:133 | Video info: 1920x1080, 30.00 FPS, 600 frames
+2026-04-07 20:11:51 | INFO     | src.detection.yolo_detector:__init__:73 | Loading YOLO model: yolov8n.pt on cpu
+2026-04-07 20:11:51 | INFO     | src.detection.yolo_detector:__init__:80 | YOLO detector initialized: conf=0.5, iou=0.45, classes=[0]
+2026-04-07 20:11:52 | INFO     | src.tracking.byte_tracker:__init__:192 | ByteTracker initialized: max_age=30, min_hits=3, iou_threshold=0.3
+2026-04-07 20:11:52 | INFO     | src.events.zone_manager:__init__:51 | ZoneManager initialized with 0 zones
+2026-04-07 20:11:52 | INFO     | src.events.intrusion_detector:__init__:53 | IntrusionDetector initialized: 0 intrusion zones, debounce=6 frames
+2026-04-07 20:11:52 | INFO     | src.events.loitering_detector:__init__:66 | LoiteringDetector initialized: 0 loitering zones, default_threshold=10.0s
+2026-04-07 20:11:52 | INFO     | src.events.event_manager:__init__:70 | EventManager initialized
+2026-04-07 20:11:52 | INFO     | src.pipeline.video_processor:_init_components:99 | All components initialized
+2026-04-07 20:11:52 | INFO     | src.output.video_writer:__init__:70 | VideoWriter initialized: output/MOT17-02-DPM-output/videos/MOT17-02-DPM_annotated.mp4, fps=30.0, size=(1920, 1080)
+2026-04-07 20:11:52 | INFO     | src.output.event_logger:__init__:60 | EventLogger initialized: output/MOT17-02-DPM-output/videos
+2026-04-07 20:12:58 | INFO     | src.output.video_writer:release:125 | Video saved: output/MOT17-02-DPM-output/videos/MOT17-02-DPM_annotated.mp4, 600 frames
+2026-04-07 20:12:58 | INFO     | src.output.event_logger:save:89 | Events saved: 0 events to MOT17-02-DPM_20260407_201152_events.json and MOT17-02-DPM_20260407_201152_events.csv
+2026-04-07 20:12:58 | INFO     | src.pipeline.video_processor:process_video:239 | Processing complete: {'total_frames': 600, 'processed_frames': 600, 'total_detections': 3388, 'unique_tracks': 0, 'total_events': 0, 'processing_time_seconds': 66.52, 'average_fps': 9.02}
+2026-04-07 20:20:18 | INFO     | src.utils.logger:setup_logger:59 | Logger initialized with level: INFO
+2026-04-07 20:20:18 | INFO     | src.pipeline.video_processor:__init__:71 | VideoProcessor initialized
+2026-04-07 20:20:18 | INFO     | src.pipeline.video_processor:process_video:120 | Processing video: /content/data/videos/MOT17-02-FRCNN.mp4
+2026-04-07 20:20:18 | INFO     | src.pipeline.video_processor:process_video:133 | Video info: 1920x1080, 30.00 FPS, 600 frames
+2026-04-07 20:20:18 | INFO     | src.detection.yolo_detector:__init__:73 | Loading YOLO model: yolov8n.pt on cpu
+2026-04-07 20:20:18 | INFO     | src.detection.yolo_detector:__init__:80 | YOLO detector initialized: conf=0.5, iou=0.45, classes=[0]
+2026-04-07 20:20:18 | INFO     | src.tracking.byte_tracker:__init__:192 | ByteTracker initialized: max_age=30, min_hits=3, iou_threshold=0.3
+2026-04-07 20:20:18 | INFO     | src.events.zone_manager:__init__:51 | ZoneManager initialized with 0 zones
+2026-04-07 20:20:18 | INFO     | src.events.intrusion_detector:__init__:53 | IntrusionDetector initialized: 0 intrusion zones, debounce=6 frames
+2026-04-07 20:20:18 | INFO     | src.events.loitering_detector:__init__:66 | LoiteringDetector initialized: 0 loitering zones, default_threshold=10.0s
+2026-04-07 20:20:18 | INFO     | src.events.event_manager:__init__:70 | EventManager initialized
+2026-04-07 20:20:18 | INFO     | src.pipeline.video_processor:_init_components:99 | All components initialized
+2026-04-07 20:20:18 | INFO     | src.output.video_writer:__init__:70 | VideoWriter initialized: output/MOT17-02-FRCNN/videos/MOT17-02-FRCNN_annotated.mp4, fps=30.0, size=(1920, 1080)
+2026-04-07 20:20:18 | INFO     | src.output.event_logger:__init__:60 | EventLogger initialized: output/MOT17-02-FRCNN/videos
+2026-04-07 20:21:26 | INFO     | src.output.video_writer:release:125 | Video saved: output/MOT17-02-FRCNN/videos/MOT17-02-FRCNN_annotated.mp4, 600 frames
+2026-04-07 20:21:26 | INFO     | src.output.event_logger:save:89 | Events saved: 0 events to MOT17-02-FRCNN_20260407_202018_events.json and MOT17-02-FRCNN_20260407_202018_events.csv
+2026-04-07 20:21:26 | INFO     | src.pipeline.video_processor:process_video:239 | Processing complete: {'total_frames': 600, 'processed_frames': 600, 'total_detections': 3388, 'unique_tracks': 0, 'total_events': 0, 'processing_time_seconds': 68.29, 'average_fps': 8.79}
