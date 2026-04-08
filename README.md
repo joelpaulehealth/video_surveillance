@@ -205,30 +205,6 @@ docker run \
 - SORT: Very fast but poor with occlusions
 - StrongSORT: Most accurate but complex
 
-## Setup Instructions
-
-### Prerequisites
-
-- Python 3.8 or higher
-- 4GB+ RAM (8GB+ recommended)
-- Optional: CUDA-capable GPU for faster processing
-
-### Installation
-
-#### Option 1: Local Setup
-
-git clone https://github.com/yourusername/surveillance-system.git
-cd surveillance-system
-
-python -m venv venv
-source venv/bin/activate # Windows: venv\Scripts\activate
-
-pip install -r requirements.txt
-
-#### Option 2: Google Colab
-
-In Colab notebook:
-Run colab file
 
 ## Usage
 
