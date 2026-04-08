@@ -195,9 +195,9 @@ class ByteTracker(BaseTracker):
         )
     
     def update(
-        self,
-        detections: List[dict],
-        frame: Optional[np.ndarray] = None
+    self,
+    detections: List[dict],
+    frame: Optional[np.ndarray] = None
     ) -> List[Track]:
         """
         Update tracker with new detections.
@@ -213,76 +213,121 @@ class ByteTracker(BaseTracker):
         """
         self._frame_count += 1
         
+        # Handle empty trackers case
+        if len(self._trackers) == 0 and len(detections) == 0:
+            return []
+        
         # Predict new locations of existing trackers
         for tracker in self._trackers:
-            tracker.predict()
+            try:
+                tracker.predict()
+            except Exception as e:
+                logger.warning(f"Error predicting tracker {tracker.id}: {e}")
+                continue
         
         # Separate high and low confidence detections
         high_dets = []
         low_dets = []
         
         for det in detections:
-            if det['confidence'] >= self._high_threshold:
-                high_dets.append(det)
-            elif det['confidence'] >= self._low_threshold:
-                low_dets.append(det)
+            try:
+                conf = det.get('confidence', 0)
+                if conf >= self._high_threshold:
+                    high_dets.append(det)
+                elif conf >= self._low_threshold:
+                    low_dets.append(det)
+            except Exception as e:
+                logger.warning(f"Error processing detection: {e}")
+                continue
+        
+        # Track which trackers are matched
+        matched_tracker_ids = set()
         
         # First association: high confidence detections
-        unmatched_trackers = list(range(len(self._trackers)))
-        unmatched_dets = list(range(len(high_dets)))
-        
         if len(self._trackers) > 0 and len(high_dets) > 0:
-            matched, unmatched_dets, unmatched_trackers = self._associate(
-                high_dets,
-                [t.get_state() for t in self._trackers],
-                self._iou_threshold
-            )
-            
-            # Update matched trackers
-            for det_idx, trk_idx in matched:
-                self._trackers[trk_idx].update(
-                    tuple(high_dets[det_idx]['bbox']),
-                    high_dets[det_idx]['confidence']
+            try:
+                tracker_boxes = [t.get_state() for t in self._trackers]
+                matched, unmatched_dets, unmatched_trackers = self._associate(
+                    high_dets,
+                    tracker_boxes,
+                    self._iou_threshold
                 )
+                
+                # Update matched trackers
+                for det_idx, trk_idx in matched:
+                    if trk_idx < len(self._trackers) and det_idx < len(high_dets):
+                        self._trackers[trk_idx].update(
+                            tuple(high_dets[det_idx]['bbox']),
+                            high_dets[det_idx]['confidence']
+                        )
+                        matched_tracker_ids.add(trk_idx)
+            except Exception as e:
+                logger.error(f"Error in first association: {e}")
+                unmatched_dets = list(range(len(high_dets)))
+                unmatched_trackers = list(range(len(self._trackers)))
+        else:
+            unmatched_dets = list(range(len(high_dets)))
+            unmatched_trackers = list(range(len(self._trackers)))
         
         # Second association: low confidence detections with unmatched trackers
         if len(unmatched_trackers) > 0 and len(low_dets) > 0:
-            remaining_trackers = [self._trackers[i] for i in unmatched_trackers]
-            matched_low, unmatched_low_dets, unmatched_low_trks = self._associate(
-                low_dets,
-                [t.get_state() for t in remaining_trackers],
-                self._iou_threshold
-            )
-            
-            for det_idx, trk_idx in matched_low:
-                actual_trk_idx = unmatched_trackers[trk_idx]
-                self._trackers[actual_trk_idx].update(
-                    tuple(low_dets[det_idx]['bbox']),
-                    low_dets[det_idx]['confidence']
-                )
-                unmatched_trackers.remove(actual_trk_idx)
+            try:
+                # Get unmatched tracker boxes
+                unmatched_tracker_boxes = []
+                valid_unmatched_indices = []
+                
+                for idx in unmatched_trackers:
+                    if idx < len(self._trackers):
+                        unmatched_tracker_boxes.append(self._trackers[idx].get_state())
+                        valid_unmatched_indices.append(idx)
+                
+                if len(unmatched_tracker_boxes) > 0:
+                    matched_low, unmatched_low_dets, unmatched_low_trks = self._associate(
+                        low_dets,
+                        unmatched_tracker_boxes,
+                        self._iou_threshold
+                    )
+                    
+                    # Update matched trackers
+                    for det_idx, trk_idx in matched_low:
+                        if trk_idx < len(valid_unmatched_indices) and det_idx < len(low_dets):
+                            actual_trk_idx = valid_unmatched_indices[trk_idx]
+                            self._trackers[actual_trk_idx].update(
+                                tuple(low_dets[det_idx]['bbox']),
+                                low_dets[det_idx]['confidence']
+                            )
+                            matched_tracker_ids.add(actual_trk_idx)
+            except Exception as e:
+                logger.error(f"Error in second association: {e}")
         
         # Create new trackers for unmatched high-confidence detections
-        for det_idx in unmatched_dets:
-            det = high_dets[det_idx]
-            tracker = KalmanBoxTracker(tuple(det['bbox']))
-            tracker.confidence = det['confidence']
-            self._trackers.append(tracker)
+        try:
+            for det_idx in unmatched_dets:
+                if det_idx < len(high_dets):
+                    det = high_dets[det_idx]
+                    tracker = KalmanBoxTracker(tuple(det['bbox']))
+                    tracker.confidence = det['confidence']
+                    self._trackers.append(tracker)
+        except Exception as e:
+            logger.error(f"Error creating new trackers: {e}")
         
         # Remove dead tracks
-        self._trackers = [
-            t for t in self._trackers
-            if t.time_since_update <= self._max_age
-        ]
+        try:
+            self._trackers = [
+                t for t in self._trackers
+                if t.time_since_update <= self._max_age
+            ]
+        except Exception as e:
+            logger.error(f"Error removing dead tracks: {e}")
         
         # Return confirmed tracks
         return self._get_tracks()
     
     def _associate(
-        self,
-        detections: List[dict],
-        tracker_boxes: List[Tuple[float, float, float, float]],
-        iou_threshold: float
+    self,
+    detections: List[dict],
+    tracker_boxes: List[Tuple[float, float, float, float]],
+    iou_threshold: float
     ) -> Tuple[List[Tuple[int, int]], List[int], List[int]]:
         """
         Associate detections to trackers using Hungarian algorithm.
@@ -295,6 +340,7 @@ class ByteTracker(BaseTracker):
         Returns:
             Tuple of (matches, unmatched_detections, unmatched_trackers)
         """
+        # Handle empty cases
         if len(tracker_boxes) == 0:
             return [], list(range(len(detections))), []
         
@@ -304,25 +350,49 @@ class ByteTracker(BaseTracker):
         # Compute IoU cost matrix
         cost_matrix = np.zeros((len(detections), len(tracker_boxes)))
         
-        for d, det in enumerate(detections):
-            for t, trk_box in enumerate(tracker_boxes):
-                iou = self._geometry.calculate_iou(tuple(det['bbox']), trk_box)
-                cost_matrix[d, t] = 1 - iou  # Cost = 1 - IoU
+        try:
+            for d, det in enumerate(detections):
+                for t, trk_box in enumerate(tracker_boxes):
+                    # Safety check for bbox
+                    if 'bbox' not in det:
+                        continue
+                    
+                    bbox = det['bbox']
+                    if len(bbox) != 4:
+                        continue
+                    
+                    iou = self._geometry.calculate_iou(tuple(bbox), trk_box)
+                    cost_matrix[d, t] = 1 - iou  # Cost = 1 - IoU
+        except Exception as e:
+            logger.error(f"Error computing cost matrix: {e}")
+            return [], list(range(len(detections))), list(range(len(tracker_boxes)))
         
         # Hungarian algorithm
-        row_indices, col_indices = linear_sum_assignment(cost_matrix)
+        try:
+            row_indices, col_indices = linear_sum_assignment(cost_matrix)
+        except Exception as e:
+            logger.error(f"Error in Hungarian algorithm: {e}")
+            return [], list(range(len(detections))), list(range(len(tracker_boxes)))
         
         matches = []
         unmatched_detections = list(range(len(detections)))
         unmatched_trackers = list(range(len(tracker_boxes)))
         
         for row, col in zip(row_indices, col_indices):
+            # Bounds checking
+            if row >= len(detections) or col >= len(tracker_boxes):
+                continue
+            
             if cost_matrix[row, col] > 1 - iou_threshold:
                 continue
             
             matches.append((row, col))
-            unmatched_detections.remove(row)
-            unmatched_trackers.remove(col)
+            
+            # Safe removal
+            if row in unmatched_detections:
+                unmatched_detections.remove(row)
+            if col in unmatched_trackers:
+                unmatched_trackers.remove(col)
         
         return matches, unmatched_detections, unmatched_trackers
     
