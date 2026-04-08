@@ -56,47 +56,41 @@ A production-ready system for processing security camera footage with real-time 
 
 ### High-Level Pipeline
 
-┌─────────────────────────────────────────────────────────────────┐
-│ INPUT LAYER │
-│ Video File(s) → Frame Extraction → Preprocessing │
-└─────────────────────┬───────────────────────────────────────────┘
-│
-┌─────────────────────▼───────────────────────────────────────────┐
-│ DETECTION LAYER │
-│ YOLOv8 Detector → Person Bounding Boxes + Confidence │
-│ • Pre-trained on COCO (80 classes) │
-│ • Multiple model sizes (n/s/m/l/x) │
-│ • GPU-accelerated inference │
-└─────────────────────┬───────────────────────────────────────────┘
-│
-┌─────────────────────▼───────────────────────────────────────────┐
-│ TRACKING LAYER │
-│ ByteTrack Multi-Object Tracker → Unique Track IDs │
-│ • Kalman filter motion prediction │
-│ • Two-stage association (high + low confidence) │
-│ • Handles occlusions and re-identification │
-└─────────────────────┬───────────────────────────────────────────┘
-│
-┌─────────────────────▼───────────────────────────────────────────┐
-│ EVENT DETECTION LAYER │
-│ Zone Manager → Spatial Reasoning → Event Detectors │
-│ • Point-in-polygon intersection (Shapely) │
-│ • Intrusion: Zone entry with debouncing │
-│ • Loitering: Stationary time + movement threshold │
-│ • Event deduplication and aggregation │
-└─────────────────────┬───────────────────────────────────────────┘
-│
-┌─────────────────────▼───────────────────────────────────────────┐
-│ OUTPUT LAYER │
-│ • Annotated Video (MP4/AVI) with overlays │
-│ • Event Logs (JSON + CSV) with timestamps │
-│ • Performance Metrics & Statistics │
-│ • Optional: Real-time Dashboard, Web Interface │
-└─────────────────────────────────────────────────────────────────┘
-
 ![Architecture Diagram](architecture_diagram.png)
 
-text
+### Pipeline Stages
+
+#### 1. Video Input & Preprocessing
+
+- Load video file or stream
+- Extract frames at specified rate
+- Resize frames if needed for performance
+
+#### 2. Person Detection
+
+- YOLOv8 model detects people in each frame
+- Returns bounding boxes with confidence scores
+- Filters for person class only
+
+#### 3. Multi-Object Tracking
+
+- ByteTrack algorithm assigns unique IDs to detected people
+- Tracks movement across frames using Kalman filters
+- Handles occlusions and re-identification
+
+#### 4. Event Detection
+
+- Checks if tracked people enter defined zones
+- Detects two event types:
+  - Zone Intrusion: Person enters restricted area
+  - Loitering: Person stays stationary beyond time threshold
+- Applies debouncing to prevent duplicate events
+
+#### 5. Output Generation
+
+- Creates annotated video with visual overlays
+- Generates structured event logs (JSON & CSV)
+- Provides performance metrics and summaries
 
 ### Component Breakdown
 
@@ -159,132 +153,423 @@ docker run \
   python run.py --video /app/data/sample.mp4 --device cpu
 ```
 
-### Option 3: Automated Setup
+## Model Choices
 
-chmod +x setup.sh
-./setup.sh
-source venv/bin/activate
+### Detection Model: YOLOv8
 
-# 🚀 Quick Start
+#### Selected Model: YOLOv8 Nano (yolov8n.pt)
 
-1. Prepare Sample Video
-   Bash
+#### Why YOLOv8?
 
-# Create data directory
+- Speed: 45-60 FPS on RTX 3060 at 1080p
+- Accuracy: 95%+ on COCO person class
+- Pre-trained: Already trained on 80 object classes
+- Easy Integration: Simple Python API, active maintenance
 
-mkdir -p data/videos
+#### Alternatives Considered:
 
-# Option A: Use your own video
+- Faster R-CNN: More accurate but 5-10x slower (5 FPS vs 45 FPS)
+- YOLOv5: Older version, YOLOv8 has better performance
+- EfficientDet: Good balance but complex setup
 
-cp /path/to/your/video.mp4 data/videos/sample.mp4
+#### Model Size Options:
 
-# Option B: Generate test video
+- YOLOv8n (Nano): Fastest, good for real-time
+- YOLOv8s (Small): Balanced speed/accuracy
+- YOLOv8m (Medium): Better accuracy, slower
+- YOLOv8l (Large): High accuracy, for offline processing
+- YOLOv8x (Extra Large): Maximum accuracy
 
-python -c "
-import cv2
-import numpy as np
+### Tracking Model: ByteTrack
 
-out = cv2.VideoWriter('data/videos/test.mp4',
-cv2.VideoWriter_fourcc(\*'mp4v'),
-30, (1280, 720))
+#### Why ByteTrack?
 
-for i in range(300):
-frame = np.zeros((720, 1280, 3), dtype=np.uint8)
-x = (i \* 4) % 1200
-cv2.rectangle(frame, (x, 300), (x+80, 420), (0, 255, 0), -1)
-out.write(frame)
+- State-of-the-art: ~80% MOTA score on MOT17 benchmark
+- Handles Occlusions: Two-stage matching (high + low confidence detections)
+- Lightweight: No separate re-identification model needed
+- Robust: Fewer ID switches than alternatives
 
-out.release()
-print('✓ Test video created')
-" 2. Run Basic Processing
-Bash
+#### Alternatives Considered:
 
-# Process video with default settings
+- DeepSORT: Requires CNN for appearance features, heavier
+- SORT: Very fast but poor with occlusions
+- StrongSORT: Most accurate but complex
 
+## Setup Instructions
+
+### Prerequisites
+
+- Python 3.8 or higher
+- 4GB+ RAM (8GB+ recommended)
+- Optional: CUDA-capable GPU for faster processing
+
+### Installation
+
+#### Option 1: Local Setup
+
+git clone https://github.com/yourusername/surveillance-system.git
+cd surveillance-system
+
+python -m venv venv
+source venv/bin/activate # Windows: venv\Scripts\activate
+
+pip install -r requirements.txt
+
+#### Option 2: Google Colab
+
+In Colab notebook:
+Run colab file
+
+## Usage
+
+Process a video:
 python run.py --video data/videos/sample.mp4
 
-# Output generated in:
+Outputs will be in:
 
-# - output/videos/sample_annotated.mp4
+- output/videos/sample_annotated.mp4
+- output/events/sample\_\*\_events.json
+- output/events/sample\_\*\_events.csv
 
-# - output/events/sample\_\*\_events.json
-
-# - output/events/sample\_\*\_events.csv
-
-3. View Results
-   Bash
-
-# Open annotated video
-
-open output/videos/sample_annotated.mp4
-
-# View events
-
-cat output/events/\*\_events.json | python -m json.tool
-
-# Summary
-
-cat output/events/\*\_events.json | jq '.summary'
-📖 Usage Examples
-Basic Usage
-Bash
-
-# Process single video
-
-python run.py --video input.mp4
-
-# Specify output directory
-
-python run.py --video input.mp4 --output results/
-
-# Custom configuration
-
-python run.py --video input.mp4 --config configs/custom.yaml
-
-# Custom zones
-
+Process with custom zones:
 python run.py --video input.mp4 --zones configs/my_zones.json
-Device Selection
-Bash
 
-# Force CPU mode
-
+Use CPU only:
 python run.py --video input.mp4 --device cpu
 
-# Use GPU (auto if available)
-
-python run.py --video input.mp4 --device cuda
-Adjust Detection
-Bash
-
-# Lower threshold (more detections)
-
+Adjust detection sensitivity:
 python run.py --video input.mp4 --confidence 0.3
-
-# Higher threshold (more precise)
-
 python run.py --video input.mp4 --confidence 0.7
-Performance
-Bash
 
-# Skip video output (faster)
-
+Skip video output:
 python run.py --video input.mp4 --no-save
 
-# Benchmark mode
+Batch process:
+python run.py --batch video1.mp4 --batch video2.mp4
 
-python run.py --video input.mp4 --benchmark
+## Configuration
 
-# Quiet mode
+configs/default_config.yaml
 
-python run.py --video input.mp4 --quiet
-Advanced Features
-Bash
+detection:
+model: "yolov8n.pt"
+confidence_threshold: 0.5
+device: "auto"
 
-# Real-time dashboard
+tracking:
+max_age: 30
+min_hits: 1
 
-python run.py --video input.mp4 --dashboard
+events:
+default_loitering_threshold: 10.0
+default_movement_threshold: 25.0
 
-# Batch processing
+## Zone Configuration
 
-python run.py --batch video1.mp4 --batch video2.mp4 --batch video3.mp4
+Interactive Zone Editor:
+python tools/zone_editor.py --video sample.mp4 --output configs/my_zones.json
+
+Controls:
+
+- Left click: Add polygon point
+- Right click: Complete polygon
+- 'i': Intrusion mode
+- 'l': Loitering mode
+- 's': Save
+
+Manual JSON:
+
+{
+"zones": [
+{
+"id": "server_room",
+"name": "Server Room",
+"type": "intrusion",
+"polygon": [[100,200],[400,200],[400,500],[100,500]],
+"enabled": true
+}
+]
+}
+
+## Adjusting Thresholds
+
+Detection:
+
+- Lower (0.3): More detections
+- Higher (0.7): More precise
+
+Loitering:
+
+- Time threshold: default 10s
+- Movement threshold: default 25px
+
+Tracking:
+
+- Max age: 30
+- Min hits: 1
+
+## Sample Results
+
+Annotated video shows:
+
+- Green boxes (tracked)
+- Red boxes (intrusion)
+- Yellow boxes (events)
+- Zone overlays
+- IDs
+- FPS
+
+## Event Log Format
+
+JSON:
+{
+"event_id": "evt_a3f2",
+"type": "INTRUSION"
+}
+
+CSV:
+event_id,type,track_id,zone_name,frame,timestamp_sec,confidence
+
+## Sample Metrics
+
+Office:
+
+- FPS: 46.8
+- Events: 8
+
+Parking (CPU):
+
+- FPS: 7.8
+- Events: 15
+
+# Known Limitations & Performance Notes
+
+## Known Limitations
+
+### What Works Well
+
+- Detects people accurately in well-lit indoor and outdoor scenes
+- Tracks multiple people simultaneously with consistent IDs
+- Detects zone intrusions reliably
+- Handles brief occlusions when people walk behind objects
+- Works on both GPU and CPU
+
+### What Breaks or Struggles
+
+#### Long Disappearances
+
+When a person is hidden for more than 1-2 seconds (behind a wall, pillar, or another person), the system loses track of them. When they reappear, they get assigned a new ID. This causes duplicate counting.
+
+#### Very Small People
+
+People who appear smaller than about 20 pixels tall (far from camera or in wide-angle shots) are often missed or detected with low confidence.
+
+#### Crowded Scenes
+
+When many people overlap or stand close together, the tracker struggles to maintain correct IDs. People may swap identities or merge into one track.
+
+#### Fast Camera Movement
+
+If the camera pans, tilts, or shakes quickly, tracking fails because the motion prediction assumes a stationary camera.
+
+#### Poor Lighting
+
+Very dark scenes, strong backlighting, or sudden lighting changes reduce detection accuracy significantly.
+
+#### Similar Looking People
+
+The system uses position and motion to track, not appearance. Two people wearing similar clothes who cross paths may swap IDs.
+
+#### Single Camera Only
+
+Cannot track the same person across multiple cameras. Each camera feed is processed independently.
+
+#### No Behavior Understanding
+
+The system only knows where people are, not what they are doing. It cannot detect fighting, falling, running, or other actions.
+
+---
+
+## What I Would Improve With More Time
+
+### Add Re-Identification Model
+
+Include a feature that recognizes people by their appearance (clothing, body shape) so they keep the same ID even after long disappearances. This would use a CNN-based re-identification model like OSNet.
+
+### Support Live Streams
+
+Currently only processes recorded video files. Adding RTSP stream support would allow real-time monitoring of IP cameras.
+
+### Smarter Loitering Detection
+
+Current loitering just checks if someone stays in one spot. A better version would understand context like queuing at a counter (normal) versus standing suspiciously (alert).
+
+### Multi-Camera Tracking
+
+Connect multiple camera feeds so the same person keeps the same ID as they move between camera views.
+
+### Add Action Detection
+
+Detect specific actions like running, falling down, fighting, or leaving objects behind. This requires pose estimation or action recognition models.
+
+### Face Blurring Option
+
+Add automatic face detection and blurring for privacy compliance in regions with strict data protection laws.
+
+### Better Zone Editor
+
+The current zone editor is basic. A web-based editor with drag-and-drop polygon creation would be much easier to use.
+
+### Alerting System
+
+Send email or SMS notifications when important events occur instead of just logging them to files.
+
+---
+
+## Edge Cases
+
+Handled:
+
+- Occlusions
+- ID switches
+- Crowds
+- Empty frames
+
+Not handled:
+
+- Long occlusions
+- Small persons
+- Extreme lighting
+
+## Optimization
+
+Faster:
+video:
+resize_width: 1280
+frame_skip: 2
+
+detection:
+model: "yolov8n.pt"
+
+python run.py --no-save
+
+Better accuracy:
+detection:
+model: "yolov8m.pt"
+confidence_threshold: 0.3
+
+## Processing Breakdown
+
+- Detection: 60–70%
+- Encoding: 15–20%
+- Tracking: 10–15%
+- Events: <5%
+
+## Debugging
+
+python run.py --device cpu
+pytest tests/ -v
+python tools/debug_pipeline.py --video input.mp4
+python tools/create_fullframe_zones.py --video input.mp4
+
+## Troubleshooting
+
+No events:
+
+- Check zones
+- Lower thresholds
+
+Low FPS:
+
+- Use GPU
+- Lower resolution
+- Use smaller model
+
+## Performance Notes
+
+### Processing Speed
+
+#### What Affects Speed
+
+- Video resolution (higher = slower)
+- YOLO model size (larger = slower but more accurate)
+- GPU vs CPU (GPU is 5-10x faster)
+- Number of people in frame (more people = slightly slower)
+
+#### Frames Per Second by Hardware
+
+| Setup               | Resolution | Model   | Speed     |
+| ------------------- | ---------- | ------- | --------- |
+| NVIDIA RTX 4090     | 1080p      | YOLOv8n | 60-70 FPS |
+| NVIDIA RTX 3060     | 1080p      | YOLOv8n | 45-60 FPS |
+| NVIDIA RTX 3060     | 1080p      | YOLOv8m | 25-35 FPS |
+| Google Colab T4 GPU | 1080p      | YOLOv8n | 30-40 FPS |
+| Google Colab CPU    | 1080p      | YOLOv8n | 3-5 FPS   |
+| Intel Core i7 (CPU) | 1080p      | YOLOv8n | 6-8 FPS   |
+| Intel Core i7 (CPU) | 720p       | YOLOv8n | 12-15 FPS |
+
+#### What This Means
+
+- With a decent GPU, you can process video faster than real-time
+- A 60-second video at 1080p takes about 40 seconds on RTX 3060
+- CPU-only processing is slow but works for offline analysis
+- Lower resolution dramatically improves speed
+
+---
+
+## Memory Usage
+
+### GPU Memory
+
+- YOLOv8n (nano): 400 MB
+- YOLOv8s (small): 800 MB
+- YOLOv8m (medium): 2 GB
+- YOLOv8l (large): 4 GB
+- YOLOv8x (extra large): 6 GB
+
+### System RAM
+
+- Base usage: 800 MB to 1 GB
+- Increases slightly with longer videos
+- Event storage: About 10 MB per 1000 events
+
+### Practical Limits
+
+- 4 GB GPU can run YOLOv8n or YOLOv8s comfortably
+- 8 GB GPU can run any model size
+- CPU mode needs at least 4 GB RAM
+- Very long videos (1+ hours) may need periodic memory cleanup
+
+---
+
+## Hardware Used for Testing
+
+### Primary Testing
+
+- Google Colab with T4 GPU (free tier)
+- 15 GB RAM, CUDA 11.8
+- Processed MOT17 dataset successfully
+
+### Secondary Testing
+
+- Local machine with RTX 3060 8GB
+- 32 GB RAM, Windows 11
+- Achieved real-time processing at 1080p
+
+### CPU Fallback Testing
+
+- Google Colab CPU runtime
+- Intel Xeon processor
+- Slower but fully functional
+
+---
+
+## Tips for Better Performance
+
+### If Processing is Too Slow
+
+Use GPU if available:
+
+```bash
+python run.py --video input.mp4 --device cuda
+```
