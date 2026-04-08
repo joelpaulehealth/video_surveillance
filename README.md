@@ -14,7 +14,7 @@ A production-ready system for processing security camera footage with real-time 
 Generated outputs from the video surveillance pipeline can be found here.
 
 - Output folder structure - Case(i) -> events csv file, events json file, annotated.mp4 file
-- Output folder link - [![Outputs](https://drive.google.com/drive/folders/1LJaIw6lS92aECDzQvAy9wbW05vgI0fEx?usp=sharing)]
+- Output folder link - [Outputs](https://drive.google.com/drive/folders/1LJaIw6lS92aECDzQvAy9wbW05vgI0fEx?usp=sharing)
 
 ## 🌟 Features
 
