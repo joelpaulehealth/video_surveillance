@@ -62,7 +62,7 @@ class EventManager:
         
         # All events collected
         self._all_events: List[Event] = []
-        
+        logger.info("EventManager initialized with config: %s", config)
         # Deduplication
         self._dedup_window = config.events.deduplicate_window_seconds
         self._recent_events: Dict[str, float] = {}  # {event_key: timestamp}
@@ -110,21 +110,29 @@ class EventManager:
         intrusion_events = self._intrusion_detector.process_frame(
             tracks, frame_number, timestamp, zones_info
         )
+        
+        logger.info(f"Frame {frame_number}: {len(intrusion_events)} intrusion events detected")
         frame_events.extend(intrusion_events)
         
         # Loitering detection
         loitering_events = self._loitering_detector.process_frame(
             tracks, frame_number, timestamp, zones_info
         )
+        logger.info(f"Frame {frame_number}: {len(loitering_events)} loitering events detected")
         frame_events.extend(loitering_events)
-        
+        logger.info(f"Frame {frame_number}: Total {len(frame_events)} events before deduplication")
         # Deduplicate events
         deduplicated = self._deduplicate_events(frame_events, timestamp)
-        
+        logger.info(f"Frame {frame_number}: {len(deduplicated)} events after deduplication")
         # Store all events
         self._all_events.extend(deduplicated)
+        logger.info(f"Frame {frame_number}: Total stored events: {len(self._all_events)}")
+         # DEBUG LOGGING
+        if len(deduplicated) > 0:
+            logger.info(f"Frame {frame_number}: {len(deduplicated)} events detected, total stored: {len(self._all_events)}")
         
         return deduplicated
+        # return deduplicated
     
     def _deduplicate_events(
         self,

@@ -117,13 +117,24 @@ class Visualizer:
         return annotated
     
     def _update_active_events(self, events: List[Dict]) -> None:
-        """Update active events mapping for current frame."""
-        # Clear old events and add new ones
-        self.active_events.clear()
-        for event in events:
-            track_id = event.get('track_id')
-            if track_id is not None:
-                self.active_events[track_id] = event.get('type', 'UNKNOWN')
+      """Update active events mapping for current frame."""
+      # Clear old events and add new ones
+      self.active_events.clear()
+      
+      for event in events:
+          # Handle both Event objects and dictionaries
+          if isinstance(event, dict):
+              # Event is already a dictionary (from .to_dict())
+              track_id = event.get('track_id')
+              event_type = event.get('type', 'UNKNOWN')
+          else:
+              # Event is an Event object
+              track_id = event.track_id
+              # event_type is an enum, need to get .value
+              event_type = event.event_type.value if hasattr(event, 'event_type') else 'UNKNOWN'
+          
+          if track_id is not None:
+              self.active_events[track_id] = event_type
     
     def _draw_zones(
         self,
@@ -248,9 +259,18 @@ class Visualizer:
     def _draw_event_indicators(
         self,
         frame: np.ndarray,
-        events: List[Dict]
+        events: List
     ) -> np.ndarray:
-        """Draw event notification indicators."""
+        """
+        Draw event notification indicators.
+        
+        Args:
+            frame: Input frame
+            events: List of Event objects or event dictionaries
+            
+        Returns:
+            Annotated frame
+        """
         if not events:
             return frame
         
@@ -274,17 +294,40 @@ class Visualizer:
         
         # Draw individual event labels near bboxes
         for event in events:
-            if 'bbox' in event:
-                x1, y1, x2, y2 = map(int, event['bbox'])
-                event_type = event.get('type', 'EVENT')
+            try:
+                # Extract bbox and event_type based on event format
+                if isinstance(event, dict):
+                    # Event is a dictionary
+                    bbox = event.get('bbox')
+                    event_type = event.get('type', 'EVENT')
+                else:
+                    # Event is an Event object
+                    bbox = event.bbox if hasattr(event, 'bbox') else None
+                    
+                    # Handle EventType enum
+                    if hasattr(event, 'event_type'):
+                        if hasattr(event.event_type, 'value'):
+                            event_type = event.event_type.value
+                        else:
+                            event_type = str(event.event_type)
+                    else:
+                        event_type = 'EVENT'
                 
-                # Draw event type below bbox
-                self._draw_label(
-                    frame,
-                    event_type,
-                    (x1, y2 + 20),
-                    self.colors.DETECTION_EVENT
-                )
+                # Draw label if bbox exists
+                if bbox is not None and len(bbox) >= 4:
+                    x1, y1, x2, y2 = map(int, bbox[:4])
+                    
+                    # Draw event type below bbox
+                    self._draw_label(
+                        frame,
+                        str(event_type),
+                        (x1, y2 + 20),
+                        self.colors.DETECTION_EVENT
+                    )
+            
+            except Exception as e:
+                logger.warning(f"Error drawing event indicator: {e}")
+                continue
         
         return frame
     

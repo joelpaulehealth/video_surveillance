@@ -32,13 +32,13 @@ from src.utils import Config, setup_logger, get_logger
 @click.option(
     '--config', '-c',
     type=click.Path(exists=True),
-    default='configs/default_config.yaml',
+    default='video_surveillance/configs/default_config.yaml', # update to configs/default_config.yaml if facing issue
     help='Path to configuration YAML file'
 )
 @click.option(
     '--zones', '-z',
     type=click.Path(exists=True),
-    default=None,
+    default='video_surveillance/configs/default_zones.json', # update to configs/default_zones.json if facing issue
     help='Path to zones JSON file (overrides config)'
 )
 @click.option(

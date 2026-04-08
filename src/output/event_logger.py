@@ -20,13 +20,8 @@ logger = get_logger(__name__)
 
 
 class EventLogger:
-    """
-    Handles logging events to JSON and CSV files.
-    
-    Provides structured event output with video metadata
-    and summary statistics.
-    """
-    
+    """Handles logging events to JSON and CSV files."""
+
     def __init__(
         self,
         output_dir: str,
@@ -34,68 +29,60 @@ class EventLogger:
         fps: float,
         total_frames: Optional[int] = None
     ):
-        """
-        Initialize event logger.
-        
-        Args:
-            output_dir: Directory for output files
-            video_name: Name of the source video
-            fps: Video FPS
-            total_frames: Total frames (if known)
-        """
         self._output_dir = Path(output_dir)
         self._output_dir.mkdir(parents=True, exist_ok=True)
-        
+
         self._video_name = video_name
         self._fps = fps
         self._total_frames = total_frames
-        
+
         # Generate output filenames
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         base_name = Path(video_name).stem
-        
+
         self._json_path = self._output_dir / f"{base_name}_{timestamp}_events.json"
         self._csv_path = self._output_dir / f"{base_name}_{timestamp}_events.csv"
-        
+
         logger.info(f"EventLogger initialized: {self._output_dir}")
-    
+
     def save(
         self,
         events: List[Event],
         metadata: Optional[Dict[str, Any]] = None
     ) -> Dict[str, Path]:
-        """
-        Save events to JSON and CSV files.
-        
-        Args:
-            events: List of Event objects to save
-            metadata: Optional additional metadata
-            
-        Returns:
-            Dictionary with paths to saved files
-        """
+        """Save events to JSON and CSV files."""
+        if not events:
+            logger.warning("No events to save!")
+            # Still create empty files
+            self._save_json([], {}, metadata)
+            self._save_csv([])
+            return {
+                'json': self._json_path,
+                'csv': self._csv_path
+            }
+
         # Prepare event data
         event_dicts = [e.to_dict() for e in events]
-        
+
         # Calculate summary
         summary = self._calculate_summary(events)
-        
+
         # Save JSON
         self._save_json(event_dicts, summary, metadata)
-        
+
         # Save CSV
         self._save_csv(event_dicts)
-        
+
         logger.info(
             f"Events saved: {len(events)} events to "
             f"{self._json_path.name} and {self._csv_path.name}"
         )
-        
+
         return {
             'json': self._json_path,
             'csv': self._csv_path
         }
-    
+
     def _save_json(
         self,
         events: List[Dict],
@@ -111,13 +98,13 @@ class EventLogger:
             'events': events,
             'summary': summary
         }
-        
+
         if metadata:
             output['metadata'] = metadata
-        
+
         with open(self._json_path, 'w') as f:
             json.dump(output, f, indent=2)
-    
+
     def _save_csv(self, events: List[Dict]) -> None:
         """Save events to CSV file."""
         if not events:
@@ -131,7 +118,7 @@ class EventLogger:
                 writer = csv.writer(f)
                 writer.writerow(headers)
             return
-        
+
         # Flatten events for CSV
         rows = []
         for event in events:
@@ -152,12 +139,12 @@ class EventLogger:
                 'confidence': event.get('confidence', '')
             }
             rows.append(row)
-        
+
         with open(self._csv_path, 'w', newline='') as f:
             writer = csv.DictWriter(f, fieldnames=rows[0].keys())
             writer.writeheader()
             writer.writerows(rows)
-    
+
     def _calculate_summary(self, events: List[Event]) -> Dict:
         """Calculate event summary statistics."""
         summary = {
@@ -166,17 +153,17 @@ class EventLogger:
             'loitering_count': 0,
             'unique_tracks': set()
         }
-        
+
         for event in events:
             if event.event_type.value == 'INTRUSION':
                 summary['intrusion_count'] += 1
             elif event.event_type.value == 'LOITERING':
                 summary['loitering_count'] += 1
-            
+
             summary['unique_tracks'].add(event.track_id)
-        
+
         summary['unique_tracks'] = len(summary['unique_tracks'])
-        
+
         return summary
     
     @property

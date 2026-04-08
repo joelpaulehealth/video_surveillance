@@ -202,7 +202,7 @@ class VideoProcessor:
         
         finally:
             progress_bar.close()
-            self._cleanup()
+            # self._cleanup()
         
         # Calculate final metrics
         self._metrics['processing_time'] = time.time() - start_time
@@ -238,6 +238,7 @@ class VideoProcessor:
         
         logger.info(f"Processing complete: {results['metrics']}")
         
+        self._cleanup()
         return results
     
     def _frame_generator(self) -> Generator[Tuple[int, np.ndarray, float], None, None]:
@@ -351,12 +352,14 @@ class VideoProcessor:
                 'tracks': len(tracks_data),
                 'events': len(self._event_manager.get_all_events())
             })
+            
+        logger.debug(f"Frame {frame_number}: {len(events)} events detected")
         return {
             'frame': frame,
             'detections': detections,
             'tracks': tracks,
             'tracks_data': tracks_data,
-            'events': [e.to_dict() for e in events],
+            'events': self._event_manager.get_all_events(),
             'fps': avg_fps
         }
     
