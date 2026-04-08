@@ -53,7 +53,7 @@ class TrackingConfig:
 @dataclass
 class EventConfig:
     """Event detection configuration."""
-    zones_config: str = "configs/zones_example.json"
+    zones_config: str = "video_surveillance/configs/zone_examples.json" # update to configs/zone_examples.json if not working
     event_log_path: str = "output/events/events.json"
     deduplicate_window_seconds: float = 2.0
     default_loitering_threshold: float = 10.0
