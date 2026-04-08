@@ -5,10 +5,16 @@
 A production-ready system for processing security camera footage with real-time person detection, multi-object tracking, zone-based event detection, and comprehensive analytics.
 
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 ---
+
+## Sample Outputs
+
+Generated outputs from the video surveillance pipeline can be found here.
+
+- Output folder structure - Case(i) -> events csv file, events json file, annotated.mp4 file
+- Output folder link - [![Outputs](https://drive.google.com/drive/folders/1LJaIw6lS92aECDzQvAy9wbW05vgI0fEx?usp=sharing)]
 
 ## 🌟 Features
 
