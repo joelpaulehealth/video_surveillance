@@ -16,6 +16,10 @@ Generated outputs from the video surveillance pipeline can be found here.
 - Output folder structure - Case(i) -> events csv file, events json file, annotated.mp4 file
 - Output folder link - [Outputs](https://drive.google.com/drive/folders/1LJaIw6lS92aECDzQvAy9wbW05vgI0fEx?usp=sharing)
 
+To run the video surveillance pipeline please find the colab notebook present here
+
+- Colab Notebook Link - [Colab](https://drive.google.com/file/d/1T63sT0P-0P2oQ7f1pzHMBWhrU3_6Ep7n/view?usp=sharing)
+
 ## 🌟 Features
 
 ### Core Capabilities
